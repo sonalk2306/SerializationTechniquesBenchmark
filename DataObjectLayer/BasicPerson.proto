@@ -1,0 +1,10 @@
+syntax="proto3";
+
+option java_package="com.wells.protoClass";
+option java_outer_classname="BasicPersonClass";
+
+message BasicPerson{
+	string name=1;
+	int32 age=2;
+	string email=3;
+}

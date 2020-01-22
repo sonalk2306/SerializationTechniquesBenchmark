@@ -1,0 +1,6 @@
+include "BasicPerson.fbs";
+namespace com.wells.flatbufClass;
+
+table People{
+	basicPerson:[BasicPerson];
+}

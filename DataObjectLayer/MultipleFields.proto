@@ -1,0 +1,51 @@
+syntax="proto3";
+
+option java_package="com.wells.protoClass";
+option java_outer_classname="MultipleFieldsClass";
+
+message MultipleFields{
+	string ab=1;
+	string ac=2;
+	string aa=3;
+	string ad=4;
+	string ae=5;
+	string af=6;
+	string ag=7;
+	string ah=8;
+	string ai=9;
+	string aj=10;
+	string ak=11;
+	string al=12;
+	string am=13;
+	string an=14;
+	string ao=15;
+	string ap=16;
+	string aq=17;
+	string ar=18;
+	string as=19;
+	string at=20;
+	string au=21;
+	string av=22;
+	string aw=23;
+	string ax=24;
+	string ay=25;
+	string az=26;
+	string a=27;
+	string b=28;
+	string c=29;
+	string d=30;
+	string e=31;
+	string f=32;
+	string g=33;
+	string h=34;
+	string i=35;
+	string j=36;
+	string k=37;
+	string l=38;
+	string m=39;
+	string n=40;
+	string o=41;
+	string p=42;
+	string q=43;
+	string r=44;
+}

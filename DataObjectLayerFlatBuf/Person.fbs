@@ -1,0 +1,16 @@
+namespace com.wells.flatbufClass;
+table Person {
+  name:string;
+  email:string;
+  address:[Address];
+}
+table Address {
+	state:string;
+	buildings:[Building];
+}
+table Building {
+	apartment:string;
+	floor:string;
+	wing:string;
+}
+root_type Person;

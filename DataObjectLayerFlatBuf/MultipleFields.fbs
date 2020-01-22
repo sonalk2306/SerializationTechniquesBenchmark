@@ -1,0 +1,21 @@
+namespace com.wells.flatbufClass;
+table MultipleFields {
+  a:string;
+  b:string;
+  c:string;
+  d:string;
+  e:string;
+  f:string;
+  g:string;
+  h:string;
+  j:string;
+  k:string;
+  l:string;
+  m:string;
+  n:string;
+  p:string;
+  q:string;
+  r:string;
+  s:string;
+  t:string;
+ }

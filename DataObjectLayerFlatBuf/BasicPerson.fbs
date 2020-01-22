@@ -1,0 +1,5 @@
+namespace com.wells.flatbufClass;
+table BasicPerson {
+  name:string;
+  email:string;
+}

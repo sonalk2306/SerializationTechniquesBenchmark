@@ -1,0 +1,30 @@
+syntax="proto3";
+
+option java_package="com.wells.protoClass";
+option java_outer_classname="PersonClass";
+
+message Person{
+	string name=1;
+	int32 age=2;
+	string email=3;
+	
+	message Phone {
+		string home=1;
+		string work=2;
+		string friends=3;
+	}
+	
+	message Address {
+		message Building {
+				int32 floor=1;
+				int32 apartment=2;
+				string wing=3;
+		}
+		string city=1;
+		string state=3;
+		repeated Building building=4;
+	}
+	
+	repeated Phone phones = 4;
+	repeated Address adds=5;
+}
