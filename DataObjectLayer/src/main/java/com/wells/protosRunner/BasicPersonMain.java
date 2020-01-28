@@ -1,57 +1,56 @@
 package com.wells.protosRunner;
 
+import java.io.BufferedReader;
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.FileReader;
+import java.io.InputStreamReader;
+import java.util.ArrayList;
+import java.util.List;
 
+import com.google.protobuf.Descriptors.Descriptor;
 import com.wells.protoClass.BasicPersonClass.BasicPerson;
+import com.wells.protoClass.GroupClass.Group;
 
 public class BasicPersonMain {
 
 	public static void main(String[] args) throws Exception {
 
-		long serializationStartTime = System.nanoTime();
-		
 		BasicPerson.Builder personBuilder = BasicPerson.newBuilder();
-		ByteArrayOutputStream singleObjectOutputStream = new ByteArrayOutputStream();
-		BasicPerson serializedPerson1 = personBuilder.setName("Name").setAge(20).setEmail("John@xyz.com").build();
-		singleObjectOutputStream.write(serializedPerson1.toByteArray());
-		
-		long serializationEndTime = System.nanoTime();
-		
-		long deserializationStartTime=System.nanoTime();
-		
-		ByteArrayInputStream singleObjectInputSteam = new ByteArrayInputStream(singleObjectOutputStream.toByteArray());
-		BasicPerson deserializedPerson1 = BasicPerson.parseFrom(singleObjectInputSteam);
-		String name=deserializedPerson1.getName();
-		int age=deserializedPerson1.getAge();
-		String email=deserializedPerson1.getEmail();
-		long deserializationEndTime=System.nanoTime();
-		long serializationDuration=(serializationEndTime-serializationStartTime)/1000000;
-		long deserializationDuration=(deserializationEndTime-deserializationStartTime)/1000000;
-		System.out.println(">>> Serialization duration for single object in millisec "+ serializationDuration );
-		System.out.println(">>> Deserialization duration for single object in millisec "+ deserializationDuration );
+		Group.Builder groupBuilder = Group.newBuilder();
+		long serializationStartTime = System.nanoTime();
+		List<BasicPerson> basicPerson = new ArrayList<BasicPerson>();
+		for (int i = 0; i < 500000; i++) {
 
-		long startTime1=System.nanoTime();
-		
-		ByteArrayOutputStream multipleObjectOutputStream = new ByteArrayOutputStream();
-		for (int i = 0; i < 5000000; i++) {
-			BasicPerson person2 = personBuilder.setName("Name").setAge(20).setEmail("John@xyz.com").build();
+			basicPerson.add(personBuilder.setName("Name").setAge(20).setEmail("John@xyz.com").build());
 
-			multipleObjectOutputStream.write(person2.toByteArray());
 		}
-		long endTime1 = System.nanoTime();
-		long startTime2=System.nanoTime();
-	
-		ByteArrayInputStream multipleObjectInputStream = new ByteArrayInputStream(multipleObjectOutputStream.toByteArray());
+		groupBuilder.addAllPerson(basicPerson);
+		Group serializedGroup = groupBuilder.build();
+		byte[] byteArray=serializedGroup.toByteArray();
+		// System.out.println(singleObjectOutputStream.size());
+		long serializationEndTime = System.nanoTime();
 
-		BasicPerson deserializedPerson = BasicPerson.parseFrom(multipleObjectInputStream);
+		long deserializationStartTime = System.nanoTime();
+		Group deserializedGroup = Group.parseFrom(byteArray);
+		List<BasicPerson> deserializedBasicPerson = new ArrayList<BasicPerson>();
+		for (int i = 0; i < deserializedBasicPerson.size(); i++) {
 
-		long endTime2 = System.nanoTime();
-		long duration1 = ((endTime1 - startTime1) / 1000000);
-		long duration2 = ((endTime2 - startTime2) / 1000000);
-		
-		System.out.println(">>> Serialization duration for multiple object in millisec "+ duration1 );
-		System.out.println(">>> Deserialization duration for multiple object in millisec "+ duration2);
+			/*
+			 * deserializedBasicPerson.get(i).getAge();
+			 * deserializedBasicPerson.get(i).getEmail();
+			 */
+
+			deserializedBasicPerson.get(i).getName();
+		}
+		long deserializationEndTime = System.nanoTime();
+		long serializationDuration = (serializationEndTime - serializationStartTime) / 1000000;
+		long deserializationDuration = (deserializationEndTime - deserializationStartTime) / 1000000;
+		System.out.println(">>> Serialization duration for single object in millisec " + serializationDuration);
+		System.out.println(">>> Deserialization duration for single object in millisec " + deserializationDuration);
 
 	}
 }

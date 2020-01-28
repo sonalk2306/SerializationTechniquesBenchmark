@@ -1,0 +1,5 @@
+include "Person.fbs";
+namespace com.wells.flatbufClass;
+table NestedGroup {
+	person : [Person];
+}
